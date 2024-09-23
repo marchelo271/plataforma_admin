@@ -1,0 +1,152 @@
+<app-sidebar> </app-sidebar>
+
+<div class="border-bottom pt-5 mt-2 mb-5 width:100%">
+  <h1 class="mt-2 mt-md-4 mb-3 pt-5">Productos</h1>
+  <div class="d-flex flex-wrap flex-md-nowrap justify-content-between">
+    <p class="text-muted">Este módulo crea un nuevo profesional en la plataforma.</p>
+    
+  </div>
+</div>
+<form #registroForm="ngForm" (ngSubmit)="registro(registroForm)">
+  <div class="card box-shadow-sm">
+    <div class="card-header">
+        <h5 style="margin-bottom: 0px;">Registro de Profesional</h5>
+    </div>
+    <div class="card-body">
+          <div class="row">
+            <div class="col-lg-8">
+                <div class="row">
+                   <h6 style="color: red;"> Llenar todos los campos que tienen *  obligatoriamente</h6>
+                  <div class="col-lg-12 form-group">	
+                      <label for="">* Nombre del profesional/empresa</label>
+                      <input type="text" class="form-control" placeholder="Nombre del profesional/empresa" name="titulo" [(ngModel)]="profesional.titulo" required>
+                  </div>
+                  <div class="col-lg-4 form-group">	
+                      <label for="">Google map</label>
+                      <input type="text" class="form-control" placeholder="google-map " name="mapa" [(ngModel)]="profesional.mapa" >
+                  </div>
+                  <div class="col-lg-4 form-group">	
+                      <label for="">Tarifa</label>
+                      <input type="number" class="form-control" placeholder="Tarifa de consulta" name="precio" [(ngModel)]="profesional.precio" >
+                  </div>
+                  <div class="col-lg-4 form-group">	
+                      <label for="">* Categoría</label>
+                      <select class="form-control custom-select" id="select-input" name="categoria" [(ngModel)]="profesional.categoria" required>
+                        <option value="" selected disabled>Seleccionar</option>
+                        <option [ngValue]="item.titulo" *ngFor="let item of config_global.servicios">{{item.titulo}}</option>
+                       
+                      </select>
+                  </div>
+                  
+                  
+                  <div class="col-lg-4 form-group">	
+                    <label for="">* Servicio a Domicilio</label>
+                    <select class="form-control custom-select" id="select-domcilio" name="serv_domicilio" [(ngModel)]="profesional.serv_domicilio" required>
+                      <option [ngValue]="false">Falso</option>
+                      <option [ngValue]="true">Verdadero </option>
+                     
+                    </select>
+                </div>
+
+                  <div class="col-lg-4 form-group">
+                    <label for=""> * Premium</label>
+                    <select class="form-control custom-select" id="select_ser_dom" name="premium" [(ngModel)]="profesional.premium" required>
+                      <option [ngValue]="false">Falso</option>
+                      <option [ngValue]="true">Verdadero </option>
+                    </select>
+                  </div>
+
+                  <div class="col-lg-4 form-group">
+                    <label for=""> * Ciudad</label>
+                    <select class="form-control custom-select" id="select_ciudad" name="ciudad" [(ngModel)]="profesional.ciudad" required>
+                      <option value="" disabled selected>Seleccionar</option>
+                      <option value="Lapaz">La Paz</option>
+                      <option value="Cochabamba">Cochabamba</option>
+                      <option value="Santacruz">Santa Cruz</option>
+                      <option value="Elalto">El Alto</option>
+                      <option value="Oruro">Oruro</option>
+                      <option value="Potosi">Potosi</option>
+                      <option value="Sucre">Sucre</option>
+                      <option value="Tarija">Tarija</option>
+                      <option value="Beni">beni</option>
+                      <option value="Pando">Pando</option>
+                    </select>
+                  </div>
+               
+                  <div class="col-lg-4 form-group">	
+                    <label for="">Telefono</label>
+                    <input type="number" class="form-control" placeholder="telefono" name="telefono" [(ngModel)]="profesional.telefono"  >
+                  </div>
+                  <div class="col-lg-4 form-group">	
+                    <label for="">Whatsapp</label>
+                    <input type="text" class="form-control" placeholder="Whatsapp" name="wpp" [(ngModel)]="profesional.wpp"  >
+                  </div>
+                  <div class="col-lg-4 form-group">	
+                    <label for="">Facebook</label>
+                    <input type="text" class="form-control" placeholder="Usuario/facebook" name="facebook" [(ngModel)]="profesional.facebook"  >
+                  </div>
+                  <div class="col-lg-4 form-group">	
+                    <label for="">Instagram</label>
+                    <input type="text" class="form-control" placeholder="usuario/instagram" name="instagram" [(ngModel)]="profesional.instagram"  >
+                  </div>
+                  <div class="col-lg-4 form-group">	
+                    <label for="">Correo</label>
+                    <input type="text" class="form-control" placeholder="correo de profesional" name="correo" [(ngModel)]="profesional.correo"  >
+                  </div>
+                  <div class="col-lg-4 form-group">	
+                    <label for="">Pagina web</label>
+                    <input type="text" class="form-control" placeholder="pagina web" name="web" [(ngModel)]="profesional.web"  >
+                  </div>
+
+                  <div class="col-lg-4 form-group">	
+                    <label for="">Tik Tok</label>
+                    <input type="text" class="form-control" placeholder="usuario/TikTok" name="tiktok" [(ngModel)]="profesional.tiktok"  >
+                  </div>
+
+                <div class="col-sm-12 form-group">
+                  <label for="nombre">Direccion </label>
+                  <textarea required class="form-control" placeholder="Direccion" name="direccion_neg"  [(ngModel)]="profesional.direccion_neg" rows="3"></textarea>
+              </div>
+
+                  <div class="col-lg-12 form-group">
+                      <label for=""> * Descripción corta</label>
+                      <textarea class="form-control" placeholder="Habilidades del profesional" name="descripcion" [(ngModel)]="profesional.descripcion" required rows="5"></textarea>
+                  </div>
+
+                  <div class="col-lg-12 form-group">
+                    <label for="contenido"> * Contenido</label>
+                    <tinymce [config]="config" name="contenido" placeholder="servicios que brinda el profesional" [(ngModel)]="profesional.contenido" >   </tinymce>
+                  </div>
+
+                </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="row">
+                <div class="col-lg-12 form-group">	
+                    <label for="">* Portada (la foto debe ser cuadrada ej 100x100)</label>
+                    <div class="custom-file">
+                      <input class="custom-file-input" type="file" id="file-input" (change)="fileChangeEvent($event)">
+                      <label class="custom-file-label" id="input-portada" style="white-space: nowrap; overflow: hidden;" for="file-input">Seleccionar imagen</label>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                  <img [src]="imgSelect" class="img-thumbnail" alt="Rounded image">
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+    <div class="card-footer">
+        <button *ngIf="!btn_load" class="btn btn-primary mr-3" type="submit">Crear profesional</button>
+        <button *ngIf="btn_load" type="button" class="btn btn-primary mr-3" disabled>
+          <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+          Creando...
+        </button>
+        <a class="btn btn-warning" [routerLink]="['/panel/productos']"> Regresar</a>
+    </div>
+</div>    
+
+
+</form>
+
+

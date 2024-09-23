@@ -1,0 +1,73 @@
+<app-sidebar></app-sidebar>
+
+<!-- Page title-->
+<div class="border-bottom pt-5 mt-2 mb-5">
+    <h1 class="mt-2 mt-md-4 mb-3 pt-5">Administrador Nuevo</h1>
+    <div class="d-flex flex-wrap flex-md-nowrap justify-content-between">
+      <p class="text-muted">Este módulo crea un nuevo admin en la tienda.</p>
+      
+    </div>
+  </div>
+  <form #registroForm="ngForm" (ngSubmit)="registro(registroForm)" >
+     <div class="card box-shadow-sm">
+         <div class="card-header">
+             <h5 style="margin-bottom: 0px;">Registro de admin</h5>
+         </div>
+          <div class="card-body">
+           
+               <div class="row">
+                 <div class="col-md-4 form-group">
+                    <label for="validationCustom01" class="form-label">Nombre</label>
+                    <input class="form-control" type="text" placeholder="Nombres" name="nombre" [(ngModel)]="admin.nombre" required>
+                 </div>
+                 <div class="col-md-4 form-group">
+                    <label for="validationCustom01" class="form-label">Apellidos</label>
+                    <input class="form-control" type="text" placeholder="Apellidos" name="apellidos" [(ngModel)]="admin.apellidos"  required>
+                 </div>
+                 <div class="col-md-4 form-group">
+                    <label for="validationCustom01" class="form-label">Correo electrónico</label>
+                    <input class="form-control" type="email" placeholder="Correo electronico" name="email" [(ngModel)]="admin.email" required>
+                 </div>
+
+                 <div class="col-md-4 form-group">
+                   <label for="validationCustom01" class="form-label">Telefono</label>
+                   <input class="form-control" type="text" placeholder="telefono" name="telefono" [(ngModel)]="admin.telefono"  >
+                 </div>
+                  
+                 <div class="col-md-4">
+                    <label for="validationCustom01" class="form-label">Rol</label>
+                    <select class="form-control custom-select" name="rol" [(ngModel)]="admin.rol" required>
+                     <option value="" disabled selected >Seleccionar</option>
+                      <option value="gerente">Gerente</option>
+                     
+                    </select>
+                  </div>
+               
+                
+                 <div class="col-md-4 form-group">
+                   <label for="validationCustom01" class="form-label">CI</label>
+                   <input class="form-control" type="number" placeholder="Carnet de identidad" name="ci" [(ngModel)]="admin.ci" >
+                 </div>
+
+                 <div class="col-md-4 form-group">
+                    <label for="validationCustom01" class="form-label">Contraseña</label>
+                    <input class="form-control" type="password" placeholder="Ponga un contraseña" name="pass1" [(ngModel)]="pass1"  required>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label for="validationCustom01" class="form-label">Confirmar Contraseña</label>
+                    <input class="form-control" type="password" placeholder="Confirmar contraseña" name="confirmPassword" [(ngModel)]="confirm_pass" required>
+                </div>
+                </div>
+              
+            
+          </div>
+        <div class="card-footer">
+             <button *ngIf="!btn_load" class="btn btn-primary mr-3" type="submit">Crear admin</button>
+             <button *ngIf="btn_load" type="button" class="btn btn-primary mr-3" disabled>
+              <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+              Creando...
+            </button>
+             <a [routerLink]="['/panel/administradores']" class="btn btn-warning">Regresar</a>
+         </div>
+     </div>  
+   </form>

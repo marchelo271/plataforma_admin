@@ -1,0 +1,128 @@
+<app-sidebar></app-sidebar>
+
+     <!-- Page title-->
+     <div class="border-bottom pt-5 mt-2 mb-5">
+        <h1 class="mt-2 mt-md-4 mb-3 pt-5">Productos</h1>
+        <div class="d-flex flex-wrap flex-md-nowrap justify-content-between">
+          <p class="text-muted">Este módulo lista todas las reseñas de un profesional.</p>
+          <p class="font-size-sm font-weight-medium pl-md-4"><a class="text-nowrap" [routerLink]="['/panel/productos']" routerLinkActive="active">Regresar<i class="cxi-angle-right font-size-base align-middle ml-1"></i></a></p>
+        </div>
+      </div>
+
+
+       <div class="card box-shadow-sm" *ngIf="producto == undefined"> 
+            <div class="card-body">
+              <h3 class="text-center">No se encontro el profesional</h3>
+              <div class="row">
+                 <div class="col-3 mx-auto">
+                  <img src="assets/img/error.png" alt="" style="width: 100%;">
+                 </div>
+              </div>
+            </div>
+       </div>
+      <div class="card box-shadow-sm" *ngIf="producto">
+            <div class="card-header">
+                <h5 style="margin-bottom: 0px;">Reseña de Profesional {{producto.titulo}}</h5>
+            </div>
+                      
+            <div class="card-body">
+                <div class="row mb-5">
+                    <div class="col-md-4" style="padding-right:0px;">
+                     <img [src]="url+'obtener_portada/'+producto.portada" style="max-width: 250px; max-height: 200px;" alt="Square image">
+                    </div>
+                    <div class="col-md-8" style="padding-left:0px;">
+                         <div class="card" style="height: 100% !important; background-color: #f5eeee;">
+                               <div class="card-body">
+                                 <h3 class="card-product-title text-truncate mb-2">
+                                   <a class="nav-link mb-3" >{{producto.titulo}}</a>
+                                   <p class="text-muted">{{producto.descripcion}}</p>
+                                   <div class="d-flex align-items-center" *ngIf="producto.precio != 'undefined'">
+                                     <span class="h5 d-inline-block mb-0 text-danger">precio de consulta: {{producto.precio}} bs</span>
+                                     
+                                   </div>
+                                 </h3>
+                               </div>
+                         </div>
+                     </div>
+               </div>
+                <div class="row" *ngFor="let item of reviews | slice:(page -1)*pageSize: (page-1)* pageSize + pageSize">
+                      <div class="col-12">
+                              <!-- Product review -->
+                        <div class="mb-4 pb-4 border-bottom" *ngIf="reviews.length >= 1">
+                            <div class="row">
+                                <div class="col-md-3 col-sm-4 mb-sm-0 mb-3">
+                                    <h3 class="mb-2 fs-lg">{{item.cliente.nombre}} </h3>
+                                    <span class="d-block mb-3 fs-sm text-muted">{{item.createdAt |date}}</span>
+                                    <div class="mt-n1 star-rating">
+                                      <i class="sr-star cxi-star-filled " [ngClass]="{'active':item.estrellas >= 1}"></i>
+                                      <i class="sr-star cxi-star-filled " [ngClass]="{'active':item.estrellas >= 2}"></i>
+                                      <i class="sr-star cxi-star-filled " [ngClass]="{'active':item.estrellas >= 3}"></i>
+                                      <i class="sr-star cxi-star-filled " [ngClass]="{'active':item.estrellas >= 4}"></i>
+                                      <i class="sr-star cxi-star-filled" [ngClass]="{'active':item.estrellas >= 5}"></i>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <p class="mb-3">
+                                      <a class="me-1 fw-bold text-decoration-none" href="#">{{item.cliente.email}}</a>
+                                       <br>    
+                                       {{item.review}}
+                                    </p>
+                                    <div class="d-flex justify-content-between">
+                                     
+                                    
+                                    </div>
+                                </div>
+                                <div class="row">
+                                  <tbody >
+                                    <tr>
+                                        <td>
+                                          <div class="btn-group dropdown d-inline-block mb-3 me-2">
+                                            <button class="btn btn-outline-secondary btn-sm dropdown-toggle show" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">OPCIONES</button>
+                                            <div class="dropdown-menu " >
+                                              <a class="dropdown-item" style="cursor: pointer;" data-toggle="modal" [attr.data-target]="'#delete-'+item._id">Eliminar Reseña</a>
+                                             </div>
+                                          </div>  
+                                          
+                                          <div class="modal fade" id="delete-{{item._id}}" tabindex="-1" style="display: none;" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h4 class="modal-title">Eliminar reseña {{item._id}} con {{item.estrellas}} estrellas? </h4>
+                                                  <button class="btn-close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">X</span></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                  <p class="fs-sm">Desea eliminar esta reseña?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                  <button class="btn btn-secondary btn-sm" type="button" data-dismiss="modal">Cerrar</button>
+                                                  <button class="btn btn-primary btn-sm" type="button" (click)="eliminar(item._id)" >Confirmar eliminacion</button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                       </td>
+                                      </tr>
+                                  </tbody>
+                                </div>
+                            </div>
+                        </div>
+                         
+                      </div>
+                </div>
+                <div class="row" *ngIf="reviews.length == 0" >
+                    <div class="col-12 text-center">
+                         <h4>No hay reseñas aun para este profesional</h4>
+                    </div>
+              </div>
+            </div>
+            <div class="card-footer">
+             
+             <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="reviews.length">
+
+             </ngb-pagination> 
+            
+           </div>
+      </div>    
+
+
+

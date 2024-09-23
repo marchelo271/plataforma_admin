@@ -1,0 +1,173 @@
+<app-sidebar> </app-sidebar>
+
+<div class="border-bottom pt-5 mt-2 mb-5 width:100%">
+  <h1 class="mt-2 mt-md-4 mb-3 pt-5">Productos</h1>
+  <div class="d-flex flex-wrap flex-md-nowrap justify-content-between">
+    <p class="text-muted">Este módulo es para actualizar los profesional de la plataforma.</p>
+    
+  </div>
+</div>
+<ng-container *ngIf="load_data">
+  <div class="card-body">
+        <div class="row">
+             <div class="col-12 text-center">
+               <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                 <span class="visually-hidden"></span>
+               </div>
+             </div>
+        </div>
+  </div>
+</ng-container>
+<ng-container *ngIf="!load_data">
+  <div class="card-body" *ngIf="producto != undefined">
+  <form #actualizarForm="ngForm" (ngSubmit)="actualizar(actualizarForm)">
+    <div class="card box-shadow-sm">
+      <div class="card-header">
+          <h5 style="margin-bottom: 0px;">Actualizacion de Profesionales</h5>
+      </div>
+      <div class="card-body">
+            <div class="row">
+              <div class="col-lg-8">
+                  <div class="row">
+                    <div class="col-lg-12 form-group">	
+                        <label for="">Nombre del profesional/empresa</label>
+                        <input type="text" class="form-control" placeholder="Nombre del profesional/empresa" name="titulo" [(ngModel)]="producto.titulo" required>
+                    </div>
+                    <div class="col-lg-4 form-group">	
+                        <label for="">Google Map</label>
+                        <input type="text" class="form-control" placeholder="coordenadas" name="mapa" [(ngModel)]="producto.mapa"  >
+                    </div>
+                    <div class="col-lg-4 form-group">	
+                        <label for="">Tarifa</label>
+                        <input type="number" class="form-control" placeholder="Tarifa de consulta" name="precio" [(ngModel)]="producto.precio" >
+                    </div>
+
+                    <div class="col-lg-4 form-group">	
+                        <label for="">Categoría</label>
+                        <select class="form-control custom-select" id="select-input" name="categoria" [(ngModel)]="producto.categoria" required>
+                          <option value="" selected disabled>Seleccionar</option>
+                          <option value="{{item.titulo}}" *ngFor="let item of config_global.servicios">{{item.titulo}}</option>
+                         
+                        </select>
+                    </div>
+
+                    <div class="col-lg-4 form-group">	
+                      <label for="">Servicio a Domicilio</label>
+                      <select class="form-control custom-select" id="select-domcilio" name="serv_domicilio" [(ngModel)]="producto.serv_domicilio" required>
+                        <option [ngValue]="false">Falso</option>
+                        <option [ngValue]="true">Verdadero </option>
+                       
+                      </select>
+                  </div>
+                   
+                  <div class="col-lg-4 form-group">
+                    <label for=""> * Premium</label>
+                    <select class="form-control custom-select" id="select_ser_dom" name="premium" [(ngModel)]="producto.premium" required>
+                      <option [ngValue]="false">Falso</option>
+                      <option [ngValue]="true">Verdadero </option>
+                    </select>
+                  </div>
+
+                  <div class="col-lg-4 form-group">
+                    <label for=""> * Ciudad</label>
+                    <select class="form-control custom-select" id="select_ciudad" name="ciudad" [(ngModel)]="producto.ciudad" required>
+                      <option value="" disabled selected>Seleccionar</option>
+                      <option value="Lapaz">La Paz</option>
+                      <option value="Cochabamba">Cochabamba</option>
+                      <option value="Santacruz">Santa Cruz</option>
+                      <option value="Elalto">El Alto</option>
+                      <option value="Oruro">Oruro</option>
+                      <option value="Potosi">Potosi</option>
+                      <option value="Sucre">Sucre</option>
+                      <option value="Tarija">Tarija</option>
+                      <option value="Beni">beni</option>
+                      <option value="Pando">Pando</option>
+                    </select>
+                  </div>
+               
+                  <div class="col-lg-4 form-group">	
+                    <label for="">Telefono</label>
+                    <input type="number" class="form-control" placeholder="telefono" name="telefono" [(ngModel)]="producto.telefono"  >
+                  </div>
+                  <div class="col-lg-4 form-group">	
+                    <label for="">Whatsapp</label>
+                    <input type="text" class="form-control" placeholder="Whatsapp" name="wpp" [(ngModel)]="producto.wpp"  >
+                  </div>
+                  <div class="col-lg-4 form-group">	
+                    <label for="">Facebook</label>
+                    <input type="text" class="form-control" placeholder="Usuario/facebook" name="facebook" [(ngModel)]="producto.facebook"  >
+                  </div>
+                  <div class="col-lg-4 form-group">	
+                    <label for="">Instagram</label>
+                    <input type="text" class="form-control" placeholder="usuario/instagram" name="instagram" [(ngModel)]="producto.instagram"  >
+                  </div>
+                  <div class="col-lg-4 form-group">	
+                    <label for="">Correo</label>
+                    <input type="text" class="form-control" placeholder="correo profesional" name="correo" [(ngModel)]="producto.correo"  >
+                  </div>
+                  <div class="col-lg-4 form-group">	
+                    <label for="">Pagina web</label>
+                    <input type="text" class="form-control" placeholder="pagina web" name="web" [(ngModel)]="producto.web"  >
+                  </div>
+                  <div class="col-lg-4 form-group">	
+                    <label for="">Tik Tok</label>
+                    <input type="text" class="form-control" placeholder="usuario/TikTok" name="tiktok" [(ngModel)]="producto.tiktok"  >
+                  </div>
+                <div class="col-sm-12 form-group">
+                  <label for="nombre">Direccion </label>
+                  <textarea required class="form-control" placeholder="Direccion" name="direccion_neg"  [(ngModel)]="producto.direccion_neg" rows="3"></textarea>
+              </div>
+  
+  
+                    <div class="col-lg-12 form-group">
+                        <label for="">Descripción corta</label>
+                        <textarea class="form-control" placeholder="Habilidades del profesional" name="descripcion" [(ngModel)]="producto.descripcion" required rows="5"></textarea>
+                    </div>
+  
+                    <div class="col-lg-12 form-group">
+                      <tinymce [config]="config" name="contenido" placeholder="servicios que brinda el profesional" [(ngModel)]="producto.contenido" >   </tinymce>
+                    </div>
+  
+                  </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="row">
+                  <div class="col-lg-12 form-group">	
+                      <label for="">Portada</label>
+                      <div class="custom-file">
+                        <input class="custom-file-input" type="file" id="file-input" (change)="fileChangeEvent($event)">
+                        <label class="custom-file-label" id="input-portada" style="white-space: nowrap; overflow: hidden;" for="file-input">Seleccionar imagen</label>
+                      </div>
+                  </div>
+                  <div class="col-lg-12">
+                    <img [src]="imgSelect" class="img-thumbnail" alt="Rounded image">
+                  </div>
+                </div>
+              </div>
+            </div>
+      </div>
+      <div class="card-footer">
+          <button *ngIf="!btn_load" class="btn btn-primary mr-3" type="submit">Actualizar producto</button>
+          <button *ngIf="btn_load" type="button" class="btn btn-primary mr-3" disabled>
+            <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+            Actualizando...
+          </button>
+          <a class="btn btn-warning" [routerLink]="['/panel/productos']"> Regresar</a>
+      </div>
+  </div>    
+  
+  
+  </form>
+</div> 
+<div class="card-body" *ngIf="producto == undefined">
+  <h3 class="text-center">No se encontro el Producto</h3>
+  <div class="row">
+     <div class="col-3 mx-auto">
+      <img src="assets/img/error.png" alt="" style="width: 100%;">
+     </div>
+  </div>
+ 
+</div>
+</ng-container>
+
+

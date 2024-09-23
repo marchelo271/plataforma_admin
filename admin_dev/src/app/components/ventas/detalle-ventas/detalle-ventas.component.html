@@ -1,0 +1,126 @@
+<app-sidebar></app-sidebar>
+
+<!-- Page title-->
+<div class="border-bottom pt-5 mt-2 mb-5">
+    <h1 class="mt-2 mt-md-4 mb-3 pt-5">Solicitudes</h1>
+    <div class="d-flex flex-wrap flex-md-nowrap justify-content-between">
+      <p class="text-muted">Este módulo lista los detalles de una solicitud .</p>
+      
+    </div>
+</div>
+
+<div class="card box-shadow-sm">
+    <div class="card-header">
+        <h5 style="margin-bottom: 0px;">Filtro de Solicitudes</h5>
+    </div>
+ 
+    <div class="card-body">
+      
+        <div class="row mb-3">
+            <div class="col-12 mb-4">
+               
+              <div class="card card-body py-3 box-shadow ">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <table class="table mb-0">
+                      <tbody>
+                        <tr *ngIf="orden.cliente">
+                            <th class="border-0 py-2 pl-0">Cliente:</th>
+                            <td class="border-0 py-2 px-0 text-muted">{{orden.cliente.nombre}} {{orden.cliente.apellidos}}</td>
+                          </tr>
+                        <tr>
+                          <th class="border-0 py-2 pl-0">Orden No:</th>
+                          <td class="border-0 py-2 px-0 text-muted">{{id.toUpperCase()}}</td>
+                        </tr>
+                                               <tr>
+                          <th class="border-0 py-2 pl-0">Fecha de la solicitud:</th>
+                          <td class="border-0 py-2 px-0 text-muted">{{orden.createdAt | date}}</td>
+                        </tr>
+                       
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="col-lg-6">
+                    <table class="table mb-0">
+                      <tbody>
+                                            
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+            
+        </div>
+
+        <div class="card border-bottom">
+             
+            <div id="order-1" class="collapse show" data-parent="#orders">
+              <div class="bg-secondary rounded mb-4">
+                <div class="table-responsive">
+                  <table class="table mb-0">
+                    <tbody>
+                      <tr *ngFor="let item of detalle">
+                        <td class="border-top-0">
+                          <div class="media pl-2 py-2">
+                            <a href="shop-single.html" style="min-width: 80px;">
+                              <img [src]="url+'obtener_portada/'+item.producto.portada" width="80" alt="Product thumb">
+                            </a>
+                            <div class="media-body pl-3">
+                              <h3 class="font-size-sm mb-3">
+                                <a href="shop-single.html" class="nav-link font-weight-bold">{{item.producto.titulo}}</a>
+                              </h3>
+                              <ul class="list-unstyled font-size-xs mt-n2 mb-2">
+                                <li class="mb-0"><span class="text-muted">ciudad:</span> {{item.producto.ciudad}}</li> 
+                              </ul>  
+                            </div>
+                          </div>
+                        </td>
+                        <td class="border-top-0">
+                          <div class="py-2">
+                            <div class="font-size-xs text-muted mb-1">Telefono:</div>
+                            <div class="font-size-sm text-dark">{{item.producto.telefono}}</div>
+                          </div>
+                        </td>
+                        <td class="border-top-0">
+                          <div class="py-2">
+                            <div class="font-size-xs text-muted mb-1">Cantidad de Solicitudes:</div>
+                            <div class="font-size-sm text-dark">{{item.producto.Nsolicitudes}}</div>
+                          </div>
+                        </td>
+                        <td class="border-top-0">
+                          <div class="py-2 pr-3 text-right">
+                            <div class="font-size-xs text-muted mb-1"> Activo en la plataforma desde:</div>
+                            <div class="font-size-sm font-weight-bold text-dark">{{item.producto.createdAt | date}}</div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                       
+                        <td *ngFor="let item of detalle">
+                          <div class="py-2">
+                            <span class="font-size-xs text-muted">Direccion: </span>
+                            <span class="font-size-sm text-dark">{{item.producto.direccion_neg}}</span>
+                          </div>
+                        </td>
+                       
+                        <td *ngFor="let item of detalle">
+                          <div class="py-2 pr-3 text-right">
+                            <span class="font-size-xs text-muted">Categoria de Servicio: </span>
+                            <span class="font-size-sm font-weight-bold text-dark">{{item.producto.categoria}}</span>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+             
+            </div>
+          </div>
+
+    </div>
+ 
+</div> 
+
